@@ -7,7 +7,8 @@ KAKEN API から抽出したデータセットです。
 
 | ファイル | 内容 |
 |---------|------|
-| `data/kaken_failed.json` | 中途終了（discontinued）・採択後辞退（declined）・中断（suspended）のプロジェクト |
+| `data/kaken_failed.json` | 中途終了（discontinued）・採択後辞退（declined）・中断（suspended）のプロジェクト（基本情報） |
+| `data/kaken_failed_detailed.json` | 同上＋研究開始時の研究概要・研究実績の概要・中断理由を含む詳細版 |
 | `data/kaken_onetime.json` | 単年度（開始年度＝終了年度）のプロジェクト |
 | `data/kaken_status_survey.json` | ステータスコード分布 |
 

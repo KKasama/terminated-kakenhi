@@ -1,0 +1,36 @@
+---
+# Weaviate + text2vec-transformers（日本語対応・ローカル無料）
+# OpenAIを使う場合は下の「OpenAI版」コメントを参照
+#
+# 起動: docker compose up -d
+# 停止: docker compose down
+# データ削除: docker compose down -v
+
+services:
+
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.28.4
+    ports:
+      - "8080:8080"
+      - "50051:50051"
+    volumes:
+      - /Volumes/HDD2/Kazuki Kasama/Claude/weaviate_data:/var/lib/weaviate
+    restart: on-failure:0
+    environment:
+      QUERY_DEFAULTS_LIMIT: "25"
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+      PERSISTENCE_DATA_PATH: "/var/lib/weaviate"
+      DEFAULT_VECTORIZER_MODULE: "text2vec-transformers"
+      ENABLE_MODULES: "text2vec-transformers"
+      TRANSFORMERS_INFERENCE_API: "http://t2v-transformers:8080"
+      CLUSTER_HOSTNAME: "node1"
+
+  # 日本語対応多言語モデル（paraphrase-multilingual-mpnet-base-v2）
+  # 50言語以上対応・日本語精度良好・軽量（約1GB）
+  t2v-transformers:
+    image: semitechnologies/transformers-inference:sentence-transformers-paraphrase-multilingual-mpnet-base-v2
+    environment:
+      ENABLE_CUDA: "0"
+    restart: on-failure:0
+
+# データはHDD2に保存: /Volumes/HDD2/Kazuki Kasama/Claude/weaviate_data/

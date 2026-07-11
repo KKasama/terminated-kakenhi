@@ -34,3 +34,4 @@ services:
     restart: on-failure:0
 
 # データはHDD2に保存: /Volumes/HDD2/Kazuki Kasama/Claude/weaviate_data/
+# Elasticsearch は別コンテナとして起動済み (localhost:9200)

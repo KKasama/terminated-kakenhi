@@ -1,12 +1,9 @@
 [
   {
-    "discontinued": 14101,
-    "declined": 8428,
-    "suspended": 273,
-    "adopted": 26316,
-    "(なし)": 169,
-    "granted": 96886,
-    "ceased": 301,
-    "project_closed": 70513
+    "discontinued": 400,
+    "declined": 401,
+    "suspended": 169,
+    "adopted": 2,
+    "granted": 397
   }
 ]

@@ -18,7 +18,7 @@ import weaviate
 from weaviate.classes.config import Configure, Property, DataType, Tokenization
 from weaviate.util import generate_uuid5
 
-DATA_DIR    = "/Volumes/HDD2/Kazuki Kasama/Claude/kaken_output"
+DATA_DIR    = "/Volumes/HDD2/Kazuki Kasama/Claude/Projects/terminated-kakenhi/data"
 DETAIL_JSON = os.path.join(DATA_DIR, "kaken_failed_detailed.json")
 BASIC_JSON  = os.path.join(DATA_DIR, "kaken_failed.json")
 COLLECTION  = "KakenProject"

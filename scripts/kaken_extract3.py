@@ -197,35 +197,10 @@ def main(appid, out_dir, page_size, delay, max_pages):
         print(f"    → 新規追加: {new}件 (累計 {len(failed_projects):,}件)\n")
 
     # ─────────────────────────────────────────
-    # PART 2: 単年度（キーワードなし全件からフィルタ）
-    # ─────────────────────────────────────────
-    print("【PART 2】 単年度プロジェクト（全件スキャン）")
-    print("  ※ 全件取得のため keyword='研究' で広く取得し期間で判定\n")
-
-    onetime_batch = fetch_all(
-        client,
-        query_kwargs={"keyword": "研究"},
-        page_size=page_size,
-        max_pages=max_pages,
-        delay=delay,
-        label="単年度スキャン",
-    )
-    for info in onetime_batch:
-        sc = info.get("status_code") or "(なし)"
-        status_survey[sc] = status_survey.get(sc, 0) + 1
-        an = info.get("award_number")
-        if an and is_onetime(info) and an not in seen_onetime:
-            seen_onetime.add(an)
-            onetime_projects.append(info)
-
-    print(f"  → 単年度: {len(onetime_projects):,}件\n")
-
-    # ─────────────────────────────────────────
     # 保存
     # ─────────────────────────────────────────
     print("【保存】")
     save_json(failed_projects,  os.path.join(out_dir, "kaken_failed.json"))
-    save_json(onetime_projects, os.path.join(out_dir, "kaken_onetime.json"))
     save_json([status_survey],  os.path.join(out_dir, "kaken_status_survey.json"))
 
     print(f"\n★ 確認されたステータスコード分布:")
@@ -235,7 +210,6 @@ def main(appid, out_dir, page_size, delay, max_pages):
     print(f"\n{'='*60}")
     print(f"抽出完了: {datetime.now():%Y-%m-%d %H:%M:%S}")
     print(f"  中途終了・採択後辞退等: {len(failed_projects):,}件")
-    print(f"  単年度プロジェクト:     {len(onetime_projects):,}件")
     print(f"{'='*60}")
     client.close()
 
